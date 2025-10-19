@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompts 優化大師</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Noto Sans TC', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .glass-effect { backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.95); }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+        .shadow-glow { box-shadow: 0 0 30px rgba(102, 126, 234, 0.3); }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
+        <!-- 頂部標題區域 -->
+        <div class="text-center mb-12">
+            <div class="animate-float inline-block">
+                <h1 class="text-6xl font-bold text-white mb-4 drop-shadow-lg">
+                    🚀 Prompts 優化大師
+                </h1>
+            </div>
+            <p class="text-xl text-white/90 mb-4 font-medium">專業級AI提示詞生成工具 - 讓您的教學更智能</p>
+            
+            <!-- 瀏覽人數統計 -->
+            <div class="glass-effect rounded-lg px-4 py-2 inline-block mb-6 shadow-md">
+                <div class="flex items-center text-gray-700 text-sm">
+                    <span class="mr-2">👥</span>
+                    <span class="font-medium">總瀏覽人數：</span>
+                    <span id="visitorCount" class="font-bold text-blue-600 ml-1">載入中...</span>
+                    <span class="mx-2">|</span>
+                    <span class="mr-1">🔥</span>
+                    <span class="font-medium">今日訪客：</span>
+                    <span id="todayCount" class="font-bold text-green-600 ml-1">載入中...</span>
+                </div>
+            </div>
+            
+            <!-- 功能特色卡片 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mb-8">
+                <div class="glass-effect rounded-xl p-4 shadow-lg">
+                    <div class="text-2xl mb-2">⚡</div>
+                    <div class="font-semibold text-gray-800">快速生成</div>
+                    <div class="text-sm text-gray-600">一鍵生成專業提示詞</div>
+                </div>
+                <div class="glass-effect rounded-xl p-4 shadow-lg">
+                    <div class="text-2xl mb-2">🎯</div>
+                    <div class="font-semibold text-gray-800">精準定制</div>
+                    <div class="text-sm text-gray-600">針對香港中學需求</div>
+                </div>
+                <div class="glass-effect rounded-xl p-4 shadow-lg">
+                    <div class="text-2xl mb-2">📚</div>
+                    <div class="font-semibold text-gray-800">TRIRO框架</div>
+                    <div class="text-sm text-gray-600">科學化提示詞結構</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 主要工具區域 -->
+        <div class="glass-effect rounded-2xl shadow-glow p-8 mb-8">
+            <!-- TRIRO框架說明 -->
+            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 mb-8 border border-blue-200">
+                <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center">
+                    🧠 <span class="ml-2">TRIRO 智能框架</span>
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4 text-sm">
+                    <div class="text-center">
+                        <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center mx-auto mb-2 font-bold">T</div>
+                        <div class="font-semibold text-blue-700">Task</div>
+                        <div class="text-gray-600">明確任務</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center mx-auto mb-2 font-bold">R</div>
+                        <div class="font-semibold text-green-700">Role</div>
+                        <div class="text-gray-600">專業角色</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-purple-500 text-white rounded-full w-8 h-8 flex items-center justify-center mx-auto mb-2 font-bold">I</div>
+                        <div class="font-semibold text-purple-700">Information</div>
+                        <div class="text-gray-600">背景資訊</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-orange-500 text-white rounded-full w-8 h-8 flex items-center justify-center mx-auto mb-2 font-bold">R</div>
+                        <div class="font-semibold text-orange-700">Requirement</div>
+                        <div class="text-gray-600">具體要求</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center mx-auto mb-2 font-bold">O</div>
+                        <div class="font-semibold text-red-700">Output</div>
+                        <div class="text-gray-600">輸出格式</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 選單區域 -->
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-8">
+                <!-- Task 任務 -->
+                <div class="space-y-3">
+                    <label class="block text-lg font-bold text-gray-800 flex items-center">
+                        <div class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm font-bold">T</div>
+                        Task
+                    </label>
+                    <select id="task" class="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none text-gray-700 bg-white shadow-sm hover:shadow-md transition-all">
+                        <option value="">選擇任務類型...</option>
+                        <option value="設計課程教案">📝 設計課程教案</option>
+                        <option value="製作練習題目">📋 製作練習題目</option>
+                        <option value="解釋複雜概念">💡 解釋複雜概念</option>
+                        <option value="評估學習成效">📊 評估學習成效</option>
+                        <option value="創建互動活動">🎮 創建互動活動</option>
+                        <option value="分析學生表現">📈 分析學生表現</option>
+                        <option value="設計實驗步驟">🔬 設計實驗步驟</option>
+                        <option value="製作學習單">📄 製作學習單</option>
+                        <option value="規劃專題研究">🔍 規劃專題研究</option>
+                        <option value="設計評量標準">⭐ 設計評量標準</option>
+                    </select>
+                </div>
+
+                <!-- Role 角色 -->
+                <div class="space-y-3">
+                    <label class="block text-lg font-bold text-gray-800 flex items-center">
+                        <div class="bg-green-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm font-bold">R</div>
+                        Role
+                    </label>
+                    <select id="role" class="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:outline-none text-gray-700 bg-white shadow-sm hover:shadow-md transition-all">
+                        <option value="">選擇專業角色...</option>
+                        <option value="中國語文科教師">📚 中國語文科教師</option>
+                        <option value="英文科教師">🌍 英文科教師</option>
+                        <option value="數學科教師">🔢 數學科教師</option>
+                        <option value="普通話科教師">🗣️ 普通話科教師</option>
+                        <option value="社會科學科(初中歷史)教師">📜 社會科學科(初中歷史)教師</option>
+                        <option value="社會科學科(初中公民、經濟及社會)教師">🏛️ 社會科學科(初中公民、經濟及社會)教師</option>
+                        <option value="高中公民與社會發展科教師">🌐 高中公民與社會發展科教師</option>
+                        <option value="中國歷史科教師">🏮 中國歷史科教師</option>
+                        <option value="高中歷史科教師">📖 高中歷史科教師</option>
+                        <option value="社會科學科(初中地理)教師">🗺️ 社會科學科(初中地理)教師</option>
+                        <option value="地理科教師">🌍 地理科教師</option>
+                        <option value="經濟科教師">💰 經濟科教師</option>
+                        <option value="旅遊及款待科教師">✈️ 旅遊及款待科教師</option>
+                        <option value="綜合科學科教師">🧪 綜合科學科教師</option>
+                        <option value="物理科教師">⚛️ 物理科教師</option>
+                        <option value="化學科教師">🧬 化學科教師</option>
+                        <option value="生物科教師">🌱 生物科教師</option>
+                        <option value="ICT科教師">💻 ICT科教師</option>
+                        <option value="體育科教師">⚽ 體育科教師</option>
+                        <option value="視覺藝術科教師">🎨 視覺藝術科教師</option>
+                        <option value="音樂科教師">🎵 音樂科教師</option>
+                        <option value="家政科教師">🍳 家政科教師</option>
+                        <option value="宗教教育科教師">⛪ 宗教教育科教師</option>
+                        <option value="STEAM教育專家">🚀 STEAM教育專家</option>
+                    </select>
+                </div>
+
+                <!-- Information 資訊 -->
+                <div class="space-y-3">
+                    <label class="block text-lg font-bold text-gray-800 flex items-center">
+                        <div class="bg-purple-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm font-bold">I</div>
+                        Information
+                    </label>
+                    <select id="information" class="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none text-gray-700 bg-white shadow-sm hover:shadow-md transition-all">
+                        <option value="">選擇教學對象...</option>
+                        <option value="中一學生">🎒 中一學生</option>
+                        <option value="中二學生">📖 中二學生</option>
+                        <option value="中三學生">📚 中三學生</option>
+                        <option value="中四學生">🎓 中四學生</option>
+                        <option value="中五學生">📝 中五學生</option>
+                        <option value="中六學生">🏆 中六學生</option>
+                        <option value="學習支援需要學生">🤝 學習支援需要學生</option>
+                        <option value="資優學生">⭐ 資優學生</option>
+                        <option value="應用學習課程學生">🔧 應用學習課程學生</option>
+                        <option value="混合能力班別">👥 混合能力班別</option>
+                    </select>
+                </div>
+
+                <!-- Requirement 要求 -->
+                <div class="space-y-3">
+                    <label class="block text-lg font-bold text-gray-800 flex items-center">
+                        <div class="bg-orange-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm font-bold">R</div>
+                        Requirement
+                    </label>
+                    <select id="requirement" class="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-orange-500 focus:outline-none text-gray-700 bg-white shadow-sm hover:shadow-md transition-all">
+                        <option value="">選擇特殊要求...</option>
+                        <option value="符合新學制課程指引">📋 符合新學制課程指引</option>
+                        <option value="融入生活情境">🏠 融入生活情境</option>
+                        <option value="強調批判思考">🤔 強調批判思考</option>
+                        <option value="適合線上教學">💻 適合線上教學</option>
+                        <option value="包含小組合作">👥 包含小組合作</option>
+                        <option value="重視實作體驗">🔨 重視實作體驗</option>
+                        <option value="結合科技工具">📱 結合科技工具</option>
+                        <option value="注重個別差異">🎯 注重個別差異</option>
+                        <option value="培養創造力">💡 培養創造力</option>
+                        <option value="連結跨領域知識">🌐 連結跨領域知識</option>
+                    </select>
+                </div>
+
+                <!-- Output 輸出 -->
+                <div class="space-y-3">
+                    <label class="block text-lg font-bold text-gray-800 flex items-center">
+                        <div class="bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm font-bold">O</div>
+                        Output
+                    </label>
+                    <select id="output" class="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:outline-none text-gray-700 bg-white shadow-sm hover:shadow-md transition-all">
+                        <option value="">選擇輸出格式...</option>
+                        <option value="詳細教案格式">📋 詳細教案格式</option>
+                        <option value="條列式重點">📝 條列式重點</option>
+                        <option value="表格化呈現">📊 表格化呈現</option>
+                        <option value="步驟式說明">🔢 步驟式說明</option>
+                        <option value="問答對話形式">💬 問答對話形式</option>
+                        <option value="圖文並茂說明">🖼️ 圖文並茂說明</option>
+                        <option value="範例示範">💡 範例示範</option>
+                        <option value="檢核表格式">✅ 檢核表格式</option>
+                        <option value="簡報大綱">📊 簡報大綱</option>
+                        <option value="學習單模板">📄 學習單模板</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 控制按鈕區域 -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+                <button id="generateBtn" class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-xl shadow-lg transform hover:scale-105 transition-all duration-200 text-lg flex items-center">
+                    ✨ <span class="ml-2">生成專業提示詞</span>
+                </button>
+                <button id="clearBtn" class="bg-gray-500 hover:bg-gray-600 text-white font-medium py-3 px-6 rounded-xl transition-colors duration-200 flex items-center">
+                    🔄 <span class="ml-2">重置所有選項</span>
+                </button>
+                <button id="randomBtn" class="bg-gradient-to-r from-green-500 to-teal-500 hover:from-green-600 hover:to-teal-600 text-white font-medium py-3 px-6 rounded-xl transition-all duration-200 flex items-center">
+                    🎲 <span class="ml-2">隨機生成</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 結果顯示區域 -->
+        <div id="resultSection" class="glass-effect rounded-2xl shadow-glow p-8 hidden">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+                <h3 class="text-3xl font-bold text-gray-800 flex items-center">
+                    🎯 <span class="ml-2">優化後的專業提示詞</span>
+                </h3>
+                <div class="flex gap-3">
+                    <button id="copyBtn" class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 flex items-center shadow-md">
+                        📋 <span class="ml-1">快速複製</span>
+                    </button>
+                    <button id="saveBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 flex items-center shadow-md">
+                        💾 <span class="ml-1">儲存範本</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="bg-gradient-to-br from-gray-50 to-blue-50 rounded-xl p-6 border-2 border-dashed border-blue-300 mb-6">
+                <textarea id="promptResult" class="w-full h-48 p-4 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none resize-none text-gray-700 bg-white shadow-sm" placeholder="您的專業提示詞將在這裡生成..."></textarea>
+            </div>
+            
+            <!-- 使用指南 -->
+            <div class="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl p-6 border border-yellow-200">
+                <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                    💡 <span class="ml-2">使用指南</span>
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
+                    <div class="flex items-start">
+                        <span class="text-green-500 mr-2">✅</span>
+                        <span>可直接複製到ChatGPT、Claude等AI工具使用</span>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="text-green-500 mr-2">✅</span>
+                        <span>支援自由編輯和個人化調整</span>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="text-green-500 mr-2">✅</span>
+                        <span>建議儲存常用範本以便重複使用</span>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="text-green-500 mr-2">✅</span>
+                        <span>可根據實際需求微調提示詞內容</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 頁腳 -->
+        <div class="text-center mt-12 text-white/80">
+            <p class="text-sm">© 2024 Prompts 優化大師 - 讓AI成為您最好的教學夥伴</p>
+            <p class="text-xs mt-2 opacity-75">製作者：cyyeung</p>
+        </div>
+    </div>
+
+    <script>
+        const generateBtn = document.getElementById('generateBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const randomBtn = document.getElementById('randomBtn');
+        const resultSection = document.getElementById('resultSection');
+        const promptResult = document.getElementById('promptResult');
+        const copyBtn = document.getElementById('copyBtn');
+        const saveBtn = document.getElementById('saveBtn');
+
+        // 生成提示詞
+        generateBtn.addEventListener('click', function() {
+            const task = document.getElementById('task').value;
+            const role = document.getElementById('role').value;
+            const information = document.getElementById('information').value;
+            const requirement = document.getElementById('requirement').value;
+            const output = document.getElementById('output').value;
+
+            if (!task || !role || !information || !requirement || !output) {
+                alert('⚠️ 請完成所有選項的選擇！');
+                return;
+            }
+
+            const prompt = `🎯 **專業教學提示詞**
+
+**角色設定：**
+請以${role}的專業身份，運用豐富的教學經驗和專業知識。
+
+**任務目標：**
+為${information}${task}，確保內容符合學生的認知發展階段和學習需求。
+
+**具體要求：**
+✅ ${requirement}
+✅ 請以${output}清晰呈現
+✅ 內容需實用、具體且易於理解
+✅ 考慮香港教育制度和文化背景
+✅ 融入現代教學理念和方法
+
+**輸出標準：**
+- 提供詳細且具體的實施建議
+- 包含清晰的步驟和注意事項
+- 考慮可能遇到的挑戰和解決方案
+- 提供評估和改進的方法
+
+請開始您的專業建議：`;
+
+            promptResult.value = prompt;
+            resultSection.classList.remove('hidden');
+            resultSection.scrollIntoView({ behavior: 'smooth' });
+            
+            // 添加成功動畫
+            generateBtn.innerHTML = '✅ <span class="ml-2">生成完成！</span>';
+            setTimeout(() => {
+                generateBtn.innerHTML = '✨ <span class="ml-2">生成專業提示詞</span>';
+            }, 2000);
+        });
+
+        // 清除所有選項
+        clearBtn.addEventListener('click', function() {
+            document.querySelectorAll('select').forEach(select => select.value = '');
+            resultSection.classList.add('hidden');
+            promptResult.value = '';
+        });
+
+        // 隨機生成
+        randomBtn.addEventListener('click', function() {
+            const selects = document.querySelectorAll('select');
+            selects.forEach(select => {
+                const options = select.querySelectorAll('option');
+                const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
+                select.value = options[randomIndex].value;
+            });
+        });
+
+        // 複製功能
+        copyBtn.addEventListener('click', function() {
+            promptResult.select();
+            document.execCommand('copy');
+            
+            const originalText = copyBtn.innerHTML;
+            copyBtn.innerHTML = '✅ <span class="ml-1">已複製！</span>';
+            copyBtn.classList.remove('bg-green-500', 'hover:bg-green-600');
+            copyBtn.classList.add('bg-green-600');
+            
+            setTimeout(() => {
+                copyBtn.innerHTML = originalText;
+                copyBtn.classList.remove('bg-green-600');
+                copyBtn.classList.add('bg-green-500', 'hover:bg-green-600');
+            }, 2000);
+        });
+
+        // 儲存功能
+        saveBtn.addEventListener('click', function() {
+            const prompt = promptResult.value;
+            if (prompt) {
+                const blob = new Blob([prompt], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `教學提示詞_${new Date().toLocaleDateString()}.txt`;
+                a.click();
+                URL.revokeObjectURL(url);
+                
+                saveBtn.innerHTML = '✅ <span class="ml-1">已儲存！</span>';
+                setTimeout(() => {
+                    saveBtn.innerHTML = '💾 <span class="ml-1">儲存範本</span>';
+                }, 2000);
+            }
+        });
+
+        // 鍵盤快捷鍵
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                clearBtn.click();
+            }
+            if (e.ctrlKey && e.key === 'Enter') {
+                generateBtn.click();
+            }
+        });
+
+        // 瀏覽人數統計功能
+        function initVisitorCounter() {
+            const today = new Date().toDateString();
+            
+            // 獲取總瀏覽人數
+            let totalVisitors = localStorage.getItem('totalVisitors') || 0;
+            totalVisitors = parseInt(totalVisitors) + 1;
+            localStorage.setItem('totalVisitors', totalVisitors);
+            
+            // 獲取今日瀏覽人數
+            let todayVisitors = 0;
+            const lastVisitDate = localStorage.getItem('lastVisitDate');
+            
+            if (lastVisitDate === today) {
+                todayVisitors = parseInt(localStorage.getItem('todayVisitors') || 0) + 1;
+            } else {
+                todayVisitors = 1;
+                localStorage.setItem('lastVisitDate', today);
+            }
+            localStorage.setItem('todayVisitors', todayVisitors);
+            
+            // 更新顯示
+            document.getElementById('visitorCount').textContent = totalVisitors.toLocaleString();
+            document.getElementById('todayCount').textContent = todayVisitors.toLocaleString();
+        }
+
+        // 頁面載入時初始化統計
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(initVisitorCounter, 500); // 延遲顯示以增加真實感
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'990c4ee4562f85b5',t:'MTc2MDgzNTMwOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
